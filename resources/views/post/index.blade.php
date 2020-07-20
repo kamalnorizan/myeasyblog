@@ -18,6 +18,10 @@
                        <tr>
                             <td>
                                 {{$post->title}}
+                                @foreach ($post->comments as $comment)
+                                    {{$comment->comment}} ~ <small>{{$comment->user->name}}</small>
+                                    <hr>
+                                @endforeach
                             </td>
                             <td>
                                 {{$post->user->name}}
@@ -31,6 +35,7 @@
                         </tr>
                         @endforeach
                     </table>
+                    {{$posts->links()}}
                 </div>
             </div>
         </div>

@@ -14,7 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::with('user','comments.user')->get();
+        $posts = Post::with('user','comments.user')->paginate(20);
+
         return view('post.index',compact('posts'));
     }
 

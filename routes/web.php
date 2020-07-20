@@ -13,12 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// DB::listen(function($event){
+//     dump($event->sql);
+// });
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('post', 'PostController');
+Route::resource('post', 'PostController')->except(['edit','show']);
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
