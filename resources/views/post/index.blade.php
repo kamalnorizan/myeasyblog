@@ -1,41 +1,50 @@
 @extends('layouts.app')
+@section('head')
+
+@endsection
+
+@section('title','Post')
+
+@section('titleaction')
+<a href="{{route('post.create')}}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah Post</a>
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Senarai Post</div>
-                <div class="card-body">
-                   <table class="table">
-                       <tr>
-                           <td>Tajuk</td>
-                           <td>Penulis</td>
-                           <td>Tarikh Publish</td>
-                           <td>Tindakan</td>
-                       </tr>
-                       @foreach ($posts as $post)
-                       <tr>
-                            <td>
-                                {{$post->title}}
-                                @foreach ($post->comments as $comment)
-                                    {{$comment->comment}} ~ <small>{{$comment->user->name}}</small>
-                                    <hr>
-                                @endforeach
-                            </td>
-                            <td>
-                                {{$post->user->name}}
-                            </td>
-                            <td>
-                                {{\Carbon\Carbon::parse($post->created_at)->format('d-m-Y')}}
-                            </td>
-                            <td>
 
-                            </td>
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRightBig">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Senarai Post</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table">
+                        <tr>
+                            <td>Tajuk</td>
+                            <td>Penulis</td>
+                            <td>Tarikh Publish</td>
+                            <td>Tindakan</td>
                         </tr>
-                        @endforeach
-                    </table>
-                    {{$posts->links()}}
+                        @foreach ($posts as $post)
+                        <tr>
+                             <td>
+                                 {{$post->title}}
+                             </td>
+                             <td>
+                                 {{$post->user->name}}
+                             </td>
+                             <td>
+                                 {{\Carbon\Carbon::parse($post->created_at)->format('d-m-Y')}}
+                             </td>
+                             <td>
+                                <a href="{{route('post.edit',['post'=>$post->id])}}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                             {{-- <a href="/post/{{$post->id}}/edit" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a> --}}
+                             </td>
+                         </tr>
+                         @endforeach
+                     </table>
+                     {{$posts->links()}}
                 </div>
             </div>
         </div>
@@ -43,3 +52,6 @@
 </div>
 @endsection
 
+@section('script')
+
+@endsection

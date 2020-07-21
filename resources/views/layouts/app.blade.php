@@ -29,7 +29,6 @@
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             @include('layouts.sidebar')
-
         </div>
     </nav>
 
@@ -164,7 +163,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="title-action">
-                        @yield('action')
+                        @yield('titleaction')
                     </div>
                 </div>
             </div>

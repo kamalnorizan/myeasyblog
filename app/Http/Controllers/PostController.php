@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         // $posts = Post::with('user','comments.user')->get();
-        $posts = Post::with('user','comments.user')->paginate(20);
+        $posts = Post::with('user','comments.user')->latest()->paginate(20);
 
         return view('post.index',compact('posts'));
     }
@@ -27,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -38,7 +38,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $post = new Post();
+        // $post->title = $request->title;
+        // $post->content = $request->content;
+        // $post->user_id = $request->user_id;
+        // $post->save();
+
+        Post::create($request->all());
+        flash('Berjaya simpan.')->success()->important();
+
+        return redirect()->route('post.index');
     }
 
     /**
@@ -60,7 +69,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('post.create',compact('post'));
     }
 
     /**
@@ -72,7 +81,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->update($request->all());
+        return redirect()->route('post.index');
     }
 
     /**
