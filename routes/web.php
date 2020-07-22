@@ -42,4 +42,5 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('/user/assignroletouser/{user}/{role}','UserController@assignroletouser')->name('user.assignroletouser');
+Route::get('/user/assignpermissiontouser/{user}/{permission}','UserController@assignpermissiontouser')->name('user.assignpermissiontouser');
 

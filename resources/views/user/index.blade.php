@@ -48,6 +48,10 @@
                 @foreach ($user->getPermissionsViaRoles() as $permission)
                 <span class="badge badge-success">{{$permission->name}}</span>
                 @endforeach
+
+                @foreach ($user->getDirectPermissions() as $permission)
+                <span class="badge badge-warning">{{$permission->name}}</span>
+                @endforeach
               </td>
               <td>
                 <div class="dropdown">
@@ -58,6 +62,18 @@
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     @foreach ($roles as $role)
                     <li><a href="{{route('user.assignroletouser',['user'=>$user->id,'role'=>$role->name])}}">{{ucfirst($role->name)}}</a></li>
+                    @endforeach
+
+                  </ul>
+                </div>
+                <div class="dropdown">
+                  <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Assign Permission
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    @foreach ($permissions as $permission)
+                    <li><a href="{{route('user.assignpermissiontouser',['user'=>$user->id,'permission'=>$permission->name])}}">{{ucfirst($permission->name)}}</a></li>
                     @endforeach
                   </ul>
                 </div>

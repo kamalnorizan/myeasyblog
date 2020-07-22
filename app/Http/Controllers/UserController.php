@@ -19,7 +19,7 @@ class UserController extends Controller
         $roles = Role::all();
         $permissions = Permission::all();
         $users = User::paginate(15);
-        return view('user.index',compact('users','roles'));
+        return view('user.index',compact('users','roles','permissions'));
     }
 
     /**
@@ -92,6 +92,13 @@ class UserController extends Controller
     {
         $user->assignRole($role);
         flash('Role assigned to user successfully')->success()->important();
+        return back();
+    }
+
+    public function assignpermissiontouser(User $user, $permission)
+    {
+        $user->givePermissionTo($permission);
+        flash('Permission assigned to user successfully')->success()->important();
         return back();
     }
 }
