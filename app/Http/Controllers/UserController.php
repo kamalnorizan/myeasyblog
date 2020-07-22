@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+        $permissions = Permission::all();
+        $users = User::paginate(15);
+        return view('user.index',compact('users','roles'));
     }
 
     /**
@@ -81,5 +86,12 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function assignroletouser(User $user, $role)
+    {
+        $user->assignRole($role);
+        flash('Role assigned to user successfully')->success()->important();
+        return back();
     }
 }
