@@ -88,7 +88,7 @@
                             <td>
                                 @foreach ($role->permissions as $permission)
 
-                                <a href="{{route('permission.revokeRolePermission',['role'=>$role->id,'permission'=>$permission->name])}}" onclick="return confirm('Are you sure you want to remove this permission from this role?')">
+                                <a href="{{route('permission.revokeRolePermission',['role'=>$role->id,'permission'=>$permission->name])}}" onclick="return confirm('Are you sure you want to remove this permission from role {{$role->name}}?')">
                                     <span class="badge badge-primary">{{$permission->name}}</span>
                                 </a>
 
