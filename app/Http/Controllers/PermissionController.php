@@ -33,14 +33,30 @@ class PermissionController extends Controller
 
     public function storepermission(Request $request)
     {
-        # code...
+        $permission=Permission::create(['name'=>$request->permissionName]);
+        flash('Permission '.$permission->name.' created successfully.')->success()->important();
+        return back();
     }
 
     public function revokeRolePermission(Role $role, $permission)
     {
-        
+
         $role->revokePermissionTo($permission);
         flash('Permission revoked successfully')->error()->important();
+        return back();
+    }
+
+    public function removePermission(Permission $permission)
+    {
+        $permission->delete();
+        flash('Permission removed successfully')->success()->important();
+        return back();
+    }
+
+    public function removeRole(Role $role)
+    {
+        $role->delete();
+        flash('Role removed successfully')->success()->important();
         return back();
     }
 }

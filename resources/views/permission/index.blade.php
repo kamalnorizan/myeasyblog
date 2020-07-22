@@ -107,6 +107,8 @@
                                         @endforeach
                                     </ul>
                                 </div>
+                                <br>
+                                <a onclick="return confirm('Are you sure you want to remove this role?')" href="{{route('permission.removeRole',['role'=>$role->id])}}" class="btn btn-danger btn-sm">Delete</a>
                             </td>
                         </tr>
                         @endforeach
@@ -135,7 +137,7 @@
                                 {{ucfirst($permission->name)}}
                             </td>
                             <td>
-                                <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                                <a onclick="return confirm('Are you sure you want to remove this permission?')" href="{{route('permission.removePermission',['permission'=>$permission->id])}}" class="btn btn-danger btn-xs">Delete</a>
                             </td>
                         </tr>
                         @endforeach
