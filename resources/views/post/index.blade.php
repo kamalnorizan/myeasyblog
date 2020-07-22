@@ -38,7 +38,8 @@
                                  {{\Carbon\Carbon::parse($post->created_at)->format('d-m-Y')}}
                              </td>
                              <td>
-                                <a href="{{route('post.edit',['post'=>$post->id])}}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                                <a href="{{route('post.show',['post'=>$post->id])}}" class="btn btn-xs btn-info"><i class="fa fa-eye"></i> Show</a>
+                                <a href="{{route('post.edit',['post'=>$post->id])}}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>
                              {{-- <a href="/post/{{$post->id}}/edit" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</a> --}}
                              </td>
                          </tr>

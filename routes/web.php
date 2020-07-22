@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('post', 'PostController')->except(['show'])->middleware('auth');
+Route::resource('post', 'PostController')->middleware('auth');
 
 Auth::routes(['register'=>false]);
 

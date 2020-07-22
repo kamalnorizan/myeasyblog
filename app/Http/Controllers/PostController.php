@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -27,7 +28,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post.create');
+        $users = User::pluck('name','id');
+        return view('post.create',compact('users'));
     }
 
     /**
@@ -44,8 +46,14 @@ class PostController extends Controller
         // $post->user_id = $request->user_id;
         // $post->save();
 
-        Post::create($request->all());
-        flash('Berjaya simpan.')->success()->important();
+        // Post::create($request->all());
+        // flash('Berjaya simpan.')->success()->important();
+
+        $user = User::find($request->user_id);
+        $user->posts()->create([
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
 
         return redirect()->route('post.index');
     }
@@ -56,9 +64,11 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($post)
     {
-        //
+
+        $post = Post::with('comments.user','user')->where('id',$post)->first();
+        return view('post.show',compact('post'));
     }
 
     /**
@@ -69,7 +79,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('post.create',compact('post'));
+        $users = User::pluck('name','id');
+        return view('post.create',compact('post','users'));
     }
 
     /**

@@ -30,4 +30,7 @@
     <li>
         <a href="/home"><i class="fa fa-dashboard"></i> <span class="nav-label">Utama</span></a>
     </li>
+    <li>
+        <a href="{{route('post.index')}}"><i class="fa fa-thumbs-up"></i> <span class="nav-label">Post</span></a>
+    </li>
 </ul>

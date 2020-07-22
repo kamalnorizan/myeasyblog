@@ -3,7 +3,13 @@
 
 @endsection
 
-@section('title','Create New Post')
+@section('title')
+@if(isset($post))
+    Update Post
+@else
+    Create New Post
+@endif
+@endsection
 
 @section('titleaction')
 
@@ -16,7 +22,7 @@
     <div class="col-md-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>New Post Form</h5>
+          <h5>Post Form</h5>
         </div>
         <div class="ibox-content">
           @if (isset($post))
