@@ -32,6 +32,7 @@
                         </div>
 
                     {!! Form::close() !!}
+                    <br><br>
                 </div>
             </div>
         </div>
@@ -43,10 +44,10 @@
                 <div class="ibox-content">
                     {!! Form::open(['method' => 'POST', 'route' => 'permission.storepermission']) !!}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            {!! Form::label('name', 'Permission Name') !!}
-                            {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
-                            <small class="text-danger">{{ $errors->first('name') }}</small>
+                        <div class="form-group{{ $errors->has('permissionName') ? ' has-error' : '' }}">
+                            {!! Form::label('permissionName', 'Permission Name') !!}
+                            {!! Form::text('permissionName', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                            <small class="text-danger">{{ $errors->first('permissionName') }}</small>
                         </div>
 
                         <div class="btn-group pull-right">
@@ -55,6 +56,64 @@
                         </div>
 
                     {!! Form::close() !!}
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Roles</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                Role Name
+                            </td>
+                            <td>
+                                Permission(s)
+                            </td>
+                            <td>
+                                Action
+                            </td>
+                        </tr>
+                        @foreach ($roles as $role)
+                        <tr>
+                            <td>
+                                {{$role->name}}
+                            </td>
+                            <td>
+                                {{$role->permissions}}
+                            </td>
+                            <td>
+                                <div class="dropdown pull-right">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                      Assign Permission
+                                      <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        @foreach ($permissions as $permission)
+                                        <li><a href="{{route('permission.assignPermissionToRole',['role'=>$role->id,'permission'=>$permission->name])}}">{{$permission->name}}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Permissions</h5>
+                </div>
+                <div class="ibox-content">
+                    content
                 </div>
             </div>
         </div>

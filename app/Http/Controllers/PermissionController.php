@@ -9,15 +9,29 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        return view('permission.index');
+        $roles=Role::all();
+        $permissions=Permission::all();
+        return view('permission.index',compact('roles','permissions'));
     }
 
-    public function storerole()
+    public function storerole(Request $request)
     {
-        # code...
+        $this->validate($request, [
+            'name' => 'required|min:3'
+        ]);
+        $role=Role::create(['name'=>$request->name]);
+        flash('Role '.$role->name.' created successfully.')->success()->important();
+        return back();
     }
 
-    public function storepermission()
+    public function assignPermissionToRole(Role $role, $permission)
+    {
+        $role->givePermissionTo($permission);
+        flash('Permission assigned seccessfully.')->success()->important();
+        return back();
+    }
+
+    public function storepermission(Request $request)
     {
         # code...
     }
