@@ -26,3 +26,11 @@ Route::resource('post', 'PostController')->middleware('auth');
 Auth::routes(['register'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/user/index','UserController@index')->name('user.index');
+
+
+Route::get('/permission/index','PermissionController@index')->name('permission.index');
+Route::post('/permission/storerole','PermissionController@storerole')->name('permission.storerole');
+Route::post('/permission/storepermission','PermissionController@storepermission')->name('permission.storepermission');
+

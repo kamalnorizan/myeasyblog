@@ -33,4 +33,10 @@
     <li>
         <a href="{{route('post.index')}}"><i class="fa fa-thumbs-up"></i> <span class="nav-label">Post</span></a>
     </li>
+    <li>
+        <a href="{{route('user.index')}}"><i class="fa fa-users"></i> <span class="nav-label">Users</span></a>
+    </li>
+    <li>
+        <a href="{{route('permission.index')}}"><i class="fa fa-key"></i> <span class="nav-label">Permissions</span></a>
+    </li>
 </ul>
