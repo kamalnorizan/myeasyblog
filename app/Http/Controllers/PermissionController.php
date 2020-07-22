@@ -35,4 +35,12 @@ class PermissionController extends Controller
     {
         # code...
     }
+
+    public function revokeRolePermission(Role $role, $permission)
+    {
+        
+        $role->revokePermissionTo($permission);
+        flash('Permission revoked successfully')->error()->important();
+        return back();
+    }
 }

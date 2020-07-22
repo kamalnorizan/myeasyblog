@@ -83,10 +83,17 @@
                         @foreach ($roles as $role)
                         <tr>
                             <td>
-                                {{$role->name}}
+                                {{ucfirst($role->name)}}
                             </td>
                             <td>
-                                {{$role->permissions}}
+                                @foreach ($role->permissions as $permission)
+
+                                <a href="{{route('permission.revokeRolePermission',['role'=>$role->id,'permission'=>$permission->name])}}" onclick="return confirm('Are you sure you want to remove this permission from this role?')">
+                                    <span class="badge badge-primary">{{$permission->name}}</span>
+                                </a>
+
+                                @endforeach
+
                             </td>
                             <td>
                                 <div class="dropdown pull-right">
@@ -113,7 +120,26 @@
                     <h5>Permissions</h5>
                 </div>
                 <div class="ibox-content">
-                    content
+                    <table class="table">
+                        <tr>
+                            <td>
+                                Permission Name
+                            </td>
+                            <td>
+                                Action
+                            </td>
+                        </tr>
+                        @foreach ($permissions as $permission)
+                        <tr>
+                            <td>
+                                {{ucfirst($permission->name)}}
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </table>
                 </div>
             </div>
         </div>

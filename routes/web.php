@@ -34,4 +34,5 @@ Route::get('/permission/index','PermissionController@index')->name('permission.i
 Route::post('/permission/storerole','PermissionController@storerole')->name('permission.storerole');
 Route::post('/permission/storepermission','PermissionController@storepermission')->name('permission.storepermission');
 Route::get('/permission/assignPermissionToRole/{role}/{permission}', 'PermissionController@assignPermissionToRole')->name('permission.assignPermissionToRole');
+Route::get('/permission/revokeRolePermission/{role}/{permission}', 'PermissionController@revokeRolePermission')->name('permission.revokeRolePermission');
 
