@@ -6,7 +6,7 @@
             </span>
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <span class="clear">
-                    <span class="block m-t-xs"> <strong class="font-bold">Name</strong>
+                    <span class="block m-t-xs"> <strong class="font-bold">{{Auth::user()->name}}</strong>
                     </span>
                     <span class="text-muted text-xs block">Admin <b class="caret"></b></span>
                 </span>
@@ -36,7 +36,9 @@
     <li>
         <a href="{{route('user.index')}}"><i class="fa fa-users"></i> <span class="nav-label">Users</span></a>
     </li>
+    @canany(['show permission','show role'])
     <li>
         <a href="{{route('permission.index')}}"><i class="fa fa-key"></i> <span class="nav-label">Permissions</span></a>
     </li>
+    @endcan
 </ul>

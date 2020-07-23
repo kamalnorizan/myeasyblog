@@ -69,7 +69,7 @@
                             <div class="dropdown-messages-box">
                                 <a href="profile.html" class="pull-left">
                                     <img alt="image" class="img-circle" src="img/a4.jpg">
-                                </a>
+                                </a>f
                                 <div class="media-body ">
                                     <small class="pull-right text-navy">5h ago</small>
                                     <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>

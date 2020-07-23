@@ -29,8 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/user/index','UserController@index')->name('user.index');
 
-Route::group(['middleware' => ['auth']], function () {
-
+Route::group(['middleware' => ['auth','roleOrPermission:create role|create permission|show role|show permission']], function () {
     Route::get('/permission/index','PermissionController@index')->name('permission.index');
     Route::post('/permission/storerole','PermissionController@storerole')->name('permission.storerole');
     Route::post('/permission/storepermission','PermissionController@storepermission')->name('permission.storepermission');

@@ -25,6 +25,9 @@
                 Name
               </td>
               <td>
+                Email
+              </td>
+              <td>
                 Role(s)
               </td>
               <td>
@@ -38,6 +41,9 @@
             <tr>
               <td>
                 {{$user->name}}
+              </td>
+              <td>
+                {{$user->email}}
               </td>
               <td>
                 @foreach ($user->roles as $role)
@@ -66,6 +72,7 @@
 
                   </ul>
                 </div>
+                @can('assign permission to user')
                 <div class="dropdown">
                   <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Assign Permission
@@ -77,6 +84,7 @@
                     @endforeach
                   </ul>
                 </div>
+                @endcan
               </td>
             </tr>
             @endforeach
