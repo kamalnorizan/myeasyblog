@@ -18,8 +18,10 @@ class ApiController extends Controller
     {
         if(Auth::attempt(['email'=>$request->email, 'password'=> $request->password])){
             $user=Auth::user();
+            $scopes=[];
+            $scopes = explode("|",$request->scopes);
             $response['name'] = $user->name;
-            $response['token'] = $user->createToken($request->tokenName, ['create-post','show-post'])->accessToken;
+            $response['token'] = $user->createToken($request->tokenName, $scopes)->accessToken;
             $response['status']='Success';
             return response()->json($response, 200);
 
