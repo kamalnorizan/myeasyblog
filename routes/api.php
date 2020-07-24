@@ -18,11 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => ['auth:api']], function () {
-    Route::get('/post/allpost', 'ApiController@allpost');
+Route::group(['middleware' => ['auth:api','scopes:create-post,show-post']], function () {
+    Route::get('/post/allpost', 'ApiController@allpost')->middleware('scope:edit-post');
     Route::post('/post/createPost', 'ApiController@createPost');
+    Route::get('logout','ApiController@logout');
+    Route::get('logoutall','ApiController@logoutall');
 });
 
 Route::post('login','ApiController@login');
 Route::post('loginApps','ApiController@loginApps');
+
 

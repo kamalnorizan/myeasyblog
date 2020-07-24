@@ -9,7 +9,9 @@ class ApiController extends Controller
     public function allpost()
     {
         $post = Post::limit(30)->get();
-        return response()->json($post, 200);
+        $response['post']=$post;
+        $response['user']=Auth::user();
+        return response()->json($response, 200);
     }
 
     public function login(Request $request)
@@ -17,7 +19,7 @@ class ApiController extends Controller
         if(Auth::attempt(['email'=>$request->email, 'password'=> $request->password])){
             $user=Auth::user();
             $response['name'] = $user->name;
-            $response['token'] = $user->createToken($request->tokenName)->accessToken;
+            $response['token'] = $user->createToken($request->tokenName, ['create-post','show-post'])->accessToken;
             $response['status']='Success';
             return response()->json($response, 200);
 
@@ -41,5 +43,23 @@ class ApiController extends Controller
         return response()->json($response, 200);
 
     }
+
+    public function logout()
+    {
+        Auth::user()->token()->revoke();
+        $response['status'] = 'success';
+        return response()->json($response, 200);
+    }
+
+    public function logoutall()
+    {
+        foreach (Auth::user()->tokens as $key => $token) {
+            $token->revoke();
+        }
+        $response['status'] = 'success';
+        return response()->json($response, 200);
+    }
+
+
 
 }
